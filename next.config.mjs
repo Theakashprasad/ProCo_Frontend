@@ -1,4 +1,9 @@
+import { withNextVideo } from "next-video/process";
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+  images: {
+    domains: ["static.vecteezy.com", "images.unsplash.com"],
+  },
+};
 
-export default nextConfig;
+export default withNextVideo(nextConfig);
