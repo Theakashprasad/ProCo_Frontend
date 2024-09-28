@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Script from "next/script";
 import useUser from "@/Hook/useUser";
 import axios from "axios";
@@ -11,6 +11,17 @@ declare global {
     Razorpay: any;
   }
 }
+interface User {
+  _id: string;
+  fullname: string;
+  email: string;
+  isVerified: boolean;
+  report: number;
+  isBlocked: boolean;
+  role: string;
+  // Add more fields as needed
+}
+
 //Ths is used as a base url for the backed req
 const BASE_URL = process.env.NEXT_PUBLIC_SERVER_URL;
 
@@ -20,11 +31,20 @@ function Payment() {
   const [loading, setLoading] = useState(false);
   const{user} = useUser()
   const { setPayment, setPremium } = useStore();
-  const storedUserDetail = localStorage.getItem("userDetail");
-  const initialUserState = storedUserDetail
-    ? JSON.parse(storedUserDetail)
-    : null;
-  const [usersDatas, setUsersDatas] = useState(initialUserState);
+ 
+  // const [usersDatas, setUsersDatas] = useState(initialUserState);
+
+  const [usersDatas, setUsersDatas] = useState<User | null>();
+  useEffect(() => {
+    const storedUserDetail = localStorage.getItem("userDetail");
+    if (storedUserDetail) {
+      const initialUserState = storedUserDetail
+        ? JSON.parse(storedUserDetail)
+        : null;
+        setUsersDatas(initialUserState);
+    }
+  }, [setUsersDatas]);
+
   
   const createOrderId = async () => {
     try {
