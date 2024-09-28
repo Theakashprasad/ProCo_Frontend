@@ -1,23 +1,14 @@
 "use client";
 import {
-  FaHome,
-  FaUser,
-  FaUsers,
-  FaEnvelope,
-  FaImage,
   FaLock,
   FaUnlock,
 } from "react-icons/fa";
 import { Input } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import { use, useEffect, useState } from "react";
-import { MdLogout } from "react-icons/md";
 import axios from "axios";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import Cookies from "js-cookie";
 import AdminLayout from "@/components/Admin/AdminLayout";
 import {
   useRef,
