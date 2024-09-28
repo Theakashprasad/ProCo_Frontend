@@ -1,5 +1,5 @@
 "use client";
-import "./App.css"; // Import your custom CSS for keyframes and animations
+import "./app.css"; // Import your custom CSS for keyframes and animations
 import React, { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
