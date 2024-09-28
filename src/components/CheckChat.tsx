@@ -46,7 +46,7 @@ const CheckChat: React.FC<CheckChatProps> = ({
     if (socket) {
       console.log("socket is presnet", socket);
     }
-  }, []);
+  }, [initializeSocket, socket]);
 
   useEffect(() => {
     const fetchChat = async () => {
@@ -74,13 +74,13 @@ const CheckChat: React.FC<CheckChatProps> = ({
     };
 
     fetchChat();
-  }, [currentUserId, otherUserId]);
+  }, [currentUserId, otherUserId, messages]);
 
   useEffect(() => {
     if (!socket) {
       initializeSocket();
     }
-  }, []);
+  }, [socket, initializeSocket]);
 
   useEffect(() => {
     if (socket) {
@@ -105,7 +105,7 @@ const CheckChat: React.FC<CheckChatProps> = ({
         socket.off("chat message", handleChatMessage);
       };
     }
-  }, [socket, onNewMessage]);
+  }, [socket, onNewMessage, otherUserId, otherUserDetails?.fullname]);
 
   const sendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -166,7 +166,7 @@ const CheckChat: React.FC<CheckChatProps> = ({
       const maxScrollTop = scrollHeight - height;
       chatContainerRef.current.scrollTop = maxScrollTop > 0 ? maxScrollTop : 0;
     }
-  }, []);
+  }, [chatContainerRef]);
 
   useEffect(() => {
     scrollToBottom();

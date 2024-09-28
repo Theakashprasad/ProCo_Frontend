@@ -3,12 +3,13 @@ import PropTypes from "prop-types";
 import animationData from "../../../assets/abc.json";
 import Lottie from "lottie-react";
 import useStore from "@/store/user";
+import Image from "next/image";
 
-const Modal = ({ open, onClose }) => {
+const Modal = ({ open, onClose }:any) => {
   const { setVideo } = useStore();
 
   useEffect(() => {
-    const handleEscape = (event) => {
+    const handleEscape = (event:any) => {
       if (event.key === "Escape") {
         onClose();
       }
@@ -77,7 +78,7 @@ const Modal = ({ open, onClose }) => {
                 className="bg-black w-32 h-28  rounded-xl flex justify-center items-center"
                 onClick={() => setVideo(videoUrls[1])}
               >
-                <img
+                <Image
                   src="/A.png"
                   alt="Example"
                   className="w-full "
@@ -87,7 +88,7 @@ const Modal = ({ open, onClose }) => {
                 className="bg-black w-32 h-28  rounded-xl flex justify-center items-center"
                 onClick={() => setVideo(videoUrls[2])}
               >
-                <img
+                <Image
                   src="/b.png"
                   alt="Example"
                   className="w-full "
@@ -97,7 +98,7 @@ const Modal = ({ open, onClose }) => {
                 className="bg-black w-32 h-28  rounded-xl flex justify-center items-center"
                 onClick={() => setVideo(videoUrls[3])}
               >
-                <img
+                <Image
                   src="/c.png"
                   alt="Example"
                   className="w-full "

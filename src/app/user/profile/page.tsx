@@ -145,7 +145,7 @@ const ProfilePage = () => {
       }
     }
     userData();
-  }, [email, setUserData, setFollowCount]);
+  }, [email, setUserData, setFollowCount, userId]);
 
   useEffect(() => {
     if (Object.keys(errors).length > 0) {

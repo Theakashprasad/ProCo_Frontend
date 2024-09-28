@@ -1,5 +1,5 @@
 import axiosInstance from "@/lib/axios";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Avatar, Typography, Card, CardContent } from "@mui/material";
 import { FaRegUserCircle } from "react-icons/fa";
 import { format } from "date-fns";
@@ -15,15 +15,16 @@ const Blogs = () => {
   const [userId, setUserId] = useState(initialUserState);
   const [blogs, setBlogs] = useState<any[]>([]);
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     const blogData = await axiosInstance.get(
       `/api/pro/getblogSave/${userId._id}`
     );
     setBlogs(blogData.data.data.blogId);
-  };
+  },[userId._id]);
+
   useEffect(() => {
     fetchData();
-  }, [setBlogs]);
+  }, [fetchData, setBlogs]);
 
   const [currentImageIndex, setCurrentImageIndex] = useState<{
     [key: string]: number;

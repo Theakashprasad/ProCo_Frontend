@@ -1,10 +1,6 @@
 "use client";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart, faShare } from "@fortawesome/free-solid-svg-icons";
 import { GoFileMedia } from "react-icons/go";
 import { IoMdClose } from "react-icons/io";
-import { Avatar, Typography, Card, CardContent } from "@mui/material";
 import useUser from "@/Hook/useUser";
 import {
   useRef,
@@ -16,7 +12,6 @@ import {
   SetStateAction,
   Dispatch,
 } from "react";
-import { z } from "zod";
 import axios from "axios";
 import { toast } from "sonner";
 import useStore from "@/store/user";
@@ -24,8 +19,6 @@ import Image from "next/image";
 //crop
 import React, { useCallback } from "react";
 import Cropper from "react-easy-crop";
-// import { Area } from "react-easy-crop/types";
-import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 const BASE_URL = process.env.NEXT_PUBLIC_SERVER_URL;

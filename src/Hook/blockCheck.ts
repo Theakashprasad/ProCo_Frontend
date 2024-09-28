@@ -42,7 +42,7 @@ const useDataMain = () => {
     };
 
     fetchData();
-  }, [email, pro]);
+  }, [email, pro, router]);
 
   return { userDatas };
 };

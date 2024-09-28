@@ -10,6 +10,7 @@ import {
   saveMessage,
   uploadImage,
 } from "@/services/chatApi";
+import Image from "next/image";
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_SERVER_URL;
 
@@ -119,7 +120,7 @@ const Chat: React.FC<ChatProps> = ({
     return () => {
       socket?.off("chat message");
     };
-  }, [socket, currentUserId, otherUserId, onNewMessage]);
+  }, [socket, currentUserId, otherUserId, onNewMessage, chatId, messages]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -225,7 +226,7 @@ const Chat: React.FC<ChatProps> = ({
                 ) : null}
 
                 {message.image && (
-                  <img
+                  <Image
                     src={message.image}
                     alt="Message"
                     className="mt-2 max-w-xs h-20 w-auto object-fill cursor-pointer"
@@ -323,7 +324,7 @@ const Chat: React.FC<ChatProps> = ({
       {fullScreenImage && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-90 z-50 p-4">
           <div className="relative w-full h-full flex items-center justify-center">
-            <img
+            <Image
               src={fullScreenImage}
               alt="Full screen image"
               className="max-h-[calc(100vh-2rem)] max-w-[calc(100vw-2rem)] object-contain"

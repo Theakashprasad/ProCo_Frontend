@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Question from "@/components/home/Question";
 import { useParams } from "next/navigation";
 import axiosInstance from "@/lib/axios";
@@ -53,8 +53,8 @@ const Dashboard = () => {
     ? params.userId[0]
     : params.userId;
   console.log("asklfddas", communityData);
-
-  const fetchData = async () => {
+  
+  const fetchData = useCallback(async () => {
     try {
       const proUserData = await axiosInstance.get(
         `/api/pro/CommunityUser/${params.userId}`
@@ -65,7 +65,7 @@ const Dashboard = () => {
         return members.find((member) => member.userId._id === user?._id);
       };
       const dataOfUser = isUserInCommunity(data.members);
-      if (user.role == "profesional" || dataOfUser?.status === "accept") {
+      if (user?.role === "profesional" || dataOfUser?.status === "accept") {
         setShowOverlay(false);
       } else {
         setShowOverlay(true);
@@ -73,13 +73,13 @@ const Dashboard = () => {
     } catch (error) {
       console.error("Error fetching community data:", error);
     }
-  };
+  }, [params.userId, user]);
 
   useEffect(() => {
     if (user) {
       fetchData();
     }
-  }, [user, params.userId]);
+  }, [user, params.userId, fetchData, router]);
 
   const handleReq = async (userId: string, status: string) => {
     const data = {

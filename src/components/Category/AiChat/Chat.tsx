@@ -39,7 +39,7 @@ const Chat: React.FC = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [user]);
 
   const runChat = async () => {
     setIsLoading(true);

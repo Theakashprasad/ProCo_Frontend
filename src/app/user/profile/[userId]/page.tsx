@@ -141,7 +141,7 @@ const ProfilePage = () => {
       }
     }
     userData();
-  }, [setUserData, setFollowCount, setUserInfo]);
+  }, [setUserData, setFollowCount, setUserInfo, userId]);
 
   useEffect(() => {
     if (Object.keys(errors).length > 0) {

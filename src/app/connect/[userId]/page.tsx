@@ -148,7 +148,7 @@ const Page = () => {
     };
 
     fetchUserChats();
-  }, [currentUserId, userId]);
+  }, [currentUserId, router, userId]);
 
   useEffect(() => {
     if (!socket) {
@@ -159,7 +159,7 @@ const Page = () => {
     return () => {
       socket?.disconnect();
     };
-  }, [socket]);
+  }, [initializeSocket, socket]);
 
   const handleUserClick = (userId: string) => {
     const clickedUser = chatUsers.find(

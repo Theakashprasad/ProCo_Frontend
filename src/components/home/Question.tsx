@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Input from "../../components/chat/Input";
 import { io, Socket } from "socket.io-client";
 import { DefaultEventsMap } from "@socket.io/component-emitter";
@@ -44,16 +44,17 @@ const Question = ({ userId }: props) => {
     null
   );
 
-  const fetchQuestions = async () => {
+  const fetchQuestions = useCallback(async () => {
     const response = await axios.get(`${BASE_URL}/api/GetQuestions/${userId}`, {
       withCredentials: true,
     });
     console.log(response.data.data);
     setQuestionData(response.data.data);
-  };
+  },[userId]);
+  
   useEffect(() => {
     fetchQuestions();
-  }, [setQuestionData]);
+  }, [setQuestionData, fetchQuestions]);
 
   const modalRef = useRef<HTMLDialogElement>(null);
   const modalRefForAns = useRef<HTMLDialogElement>(null);

@@ -64,7 +64,7 @@ function Todo() {
       }
     };
     fetchTodos();
-  }, [BASE_URL]);
+  }, [BASE_URL, user]);
 
   const getCurrentDay = () => {
     const days = [

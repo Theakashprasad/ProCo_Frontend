@@ -31,7 +31,7 @@ const Room = ({ userId }: props) => {
       }
     };
     fetchData();
-  }, []);
+  }, [userId]);
 
   const handleSubmit = async (ev: { preventDefault: () => void }) => {
     ev.preventDefault();

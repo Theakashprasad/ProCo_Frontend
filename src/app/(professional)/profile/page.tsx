@@ -176,7 +176,7 @@ const ProfilePage = () => {
       }
     }
     userData();
-  }, [email, setUserData, setConnectionData]);
+  }, [email, setUserData, setConnectionData, usersDatas]);
 
   // useEffect(() => {
   //   if (Object.keys(errors).length > 0) {

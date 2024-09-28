@@ -185,7 +185,7 @@ const ProfilePage = ({ params }: Props) => {
       }
     }
     userData();
-  }, [email, setUserData, params, setConnectionData]);
+  }, [email, setUserData, params, setConnectionData, usersDatas]);
 
   // useEffect(() => {
   //   if (Object.keys(errors).length > 0) {
