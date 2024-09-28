@@ -11,7 +11,6 @@ import {
 import { TiTick } from "react-icons/ti";
 import { ImCross } from "react-icons/im";
 import { Input } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { MdLogout } from "react-icons/md";
