@@ -10,19 +10,20 @@ const Center = () => {
   const [isActive, setIsActive] = useState(false);
   const totalTime = 15; // Total time in seconds (25 minutes)
   
-
   useEffect(() => {
-    let interval = null;
+    let interval: number | undefined;
+  
     if (isActive && time > 0) {
-      interval = setInterval(() => {
+      interval = window.setInterval(() => {
         setTime((time) => time - 1);
       }, 1000);
     } else if (!isActive && time !== 0) {
       clearInterval(interval);
     }
+  
     return () => clearInterval(interval);
   }, [isActive, time]);
-
+  
   const toggleTimer = () => {
     setIsActive(!isActive);
   };
