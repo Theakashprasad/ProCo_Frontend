@@ -5,11 +5,11 @@ import Lottie from "lottie-react";
 import useStore from "@/store/user";
 import Image from "next/image";
 
-const Modal = ({ open, onClose }:any) => {
+const Modal = ({ open, onClose }: any) => {
   const { setVideo } = useStore();
 
   useEffect(() => {
-    const handleEscape = (event:any) => {
+    const handleEscape = (event: any) => {
       if (event.key === "Escape") {
         onClose();
       }
@@ -51,20 +51,27 @@ const Modal = ({ open, onClose }:any) => {
         </button>
 
         <div className="text-center flex ">
+          <div className="w-1/4">
+            <div className="text-white text-cente text-xl font-mono w-2/3">
+              settings{" "}
+            </div>
 
-        <div className="w-1/4">
-  <div className="text-white text-cente text-xl font-mono w-2/3">settings </div>
-
-  <div className="h-full text-start pt-10 space-y-5">
-    <button className="w-2/3 h-10 rounded-xl bg-black bg-opacity-20 backdrop-blur text-blur text-sm ">image</button>
-    <br />
-    <button className="w-2/3 h-10 rounded-xl bg-black bg-opacity-50 backdrop-blur text-blur text-sm">video</button>
-    <br />
-    <button className="w-2/3 h-10 rounded-xl bg-black bg-opacity-20 backdrop-blur text-blur text-sm">ambiens</button>
-  </div>
-</div>
-{/* self closing div, used for margin */}
-<div className="bg-white w-1 mr-10"/>
+            <div className="h-full text-start pt-10 space-y-5">
+              <button className="w-2/3 h-10 rounded-xl bg-black bg-opacity-20 backdrop-blur text-blur text-sm ">
+                image
+              </button>
+              <br />
+              <button className="w-2/3 h-10 rounded-xl bg-black bg-opacity-50 backdrop-blur text-blur text-sm">
+                video
+              </button>
+              <br />
+              <button className="w-2/3 h-10 rounded-xl bg-black bg-opacity-20 backdrop-blur text-blur text-sm">
+                ambiens
+              </button>
+            </div>
+          </div>
+          {/* self closing div, used for margin */}
+          <div className="bg-white w-1 mr-10" />
           {/* INNER CONTENT */}
           <div className="h-80 w-2/3 opacity-100 ">
             <div className="h-full grid grid-cols-3 pt-10 gap-5 ">
@@ -81,7 +88,9 @@ const Modal = ({ open, onClose }:any) => {
                 <Image
                   src="/A.png"
                   alt="Example"
-                  className="w-full "
+                  width={500}
+                  height={300}
+                  className="w-full"
                 />
               </div>
               <div
@@ -90,6 +99,8 @@ const Modal = ({ open, onClose }:any) => {
               >
                 <Image
                   src="/b.png"
+                  width={500}
+                  height={300}
                   alt="Example"
                   className="w-full "
                 />
@@ -100,6 +111,8 @@ const Modal = ({ open, onClose }:any) => {
               >
                 <Image
                   src="/c.png"
+                  width={500}
+                  height={300}
                   alt="Example"
                   className="w-full "
                 />

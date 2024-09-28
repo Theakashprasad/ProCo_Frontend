@@ -12,9 +12,13 @@ const MODEL_NAME = "gemini-pro";
 // const API_KEY = process.env.VITE_API_KEY
 const API_KEY = "AIzaSyBmytuwmL7JE4-PVoRkxNPSENYDwcnX2NY";
 
+interface ChatMessage {
+  role: string;
+  text: string;
+}
 const AiChat = () => {
   const [userInput, setUserInput] = useState("");
-  const [chatHistory, setChatHistory] = useState([]);
+  const [chatHistory, setChatHistory] = useState<ChatMessage[]>([]); // Explicitly type chatHistory
   const [isLoading, setIsLoading] = useState(false);
 
   const runChat = async () => {
@@ -70,7 +74,7 @@ const AiChat = () => {
         { role: "model", text: response.text() },
       ]);
       setUserInput("");
-    } catch (error) {
+    } catch (error:any) {
       console.error("Error in chat:", error);
       setChatHistory((prevHistory) => [
         ...prevHistory,

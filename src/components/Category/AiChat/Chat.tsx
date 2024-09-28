@@ -59,7 +59,6 @@ const Chat: React.FC = () => {
         category: HarmCategory.HARM_CATEGORY_HARASSMENT,
         threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
       },
-      // ... other safety settings
     ];
 
     const chat = model.startChat({
@@ -70,7 +69,7 @@ const Chat: React.FC = () => {
           role: "user",
           parts: [
             {
-              text: "You are PROCO_AI, an AI assistant created by proCo to help users learn about any education content they want to know. Your primary task is to capture the user's name before proceeding further. Do not answer any questions until the user has provided their name. Once you have their name, thank them and address them personally as you continue the conversation.",
+              text: "You are PROCO_AI, an AI assistant created by proCo to help users learn about any education content they want to know...",
             },
           ],
         },
@@ -90,19 +89,12 @@ const Chat: React.FC = () => {
       const response = result.response;
       const updatedChatHistory: ChatMessage[] = [
         ...chatHistory,
-        { role: "user", text: userInput }, // "user" is explicitly typed
-        { role: "model", text: response.text() }, // "model" is explicitly typed
+        { role: "user", text: userInput },
+        { role: "model", text: response.text() },
       ];
 
       setChatHistory(updatedChatHistory);
-
-      // setChatHistory((prevHistory) => [
-      //   ...prevHistory,
-      //   { role: "user", text: userInput },
-      //   { role: "model", text: response.text() },
-      // ]);
       setUserInput("");
-      console.log(BASE_URL, updatedChatHistory);
 
       const data = await axios.post(
         `${BASE_URL}/api/ChatAi`,
@@ -125,17 +117,19 @@ const Chat: React.FC = () => {
       setIsLoading(false);
     }
   };
+
   const handleDelete = async () => {
     const data = await axios.post(
       `${BASE_URL}/api/ChatAiDelete`,
       { email: user?.email, userId: user?._id },
       { withCredentials: true }
     );
-    setChatHistory([])
+    setChatHistory([]);
     toast.success("Successfully deleted", {
       position: "top-center",
     });
   };
+
   return (
     <div className="flex flex-col items-center min-h-screen bg-[#1d1d1d]">
       <div className="w-full rounded-lg overflow-hidden">
@@ -170,7 +164,7 @@ const Chat: React.FC = () => {
           disabled={isLoading}
           className="ml-2 px-6 py-2 bg-stone-700 text-white font-semibold rounded-r-full hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 disabled:bg-blue-300 disabled:cursor-not-allowed transition duration-300 ease-in-out"
         >
-          {isLoading ? "Sending..." : <IoSend /> }
+          {isLoading ? "Sending..." : <IoSend />}
         </button>
         <div className="pl-7 pt-4">
           <AiTwotoneDelete className="w-5 h-5" onClick={handleDelete} />
