@@ -14,7 +14,14 @@ import Cookies from "js-cookie";
 const BASE_URL = process.env.NEXT_PUBLIC_SERVER_URL;
 
 export default function Pro_verify() {
-  let storedEmail = localStorage.getItem("ProEmail") ?? "";
+  const [storedEmail, setStoredEmail] = useState('');
+  useEffect(() => {
+    let storedEmail = localStorage.getItem("ProEmail") ?? "";
+    if (storedEmail) {
+      setStoredEmail(storedEmail);
+    }
+  }, []);
+
   const router = useRouter();
   const [imagePreview, setImagePreview] = useState<string | ArrayBuffer | null>(
     null

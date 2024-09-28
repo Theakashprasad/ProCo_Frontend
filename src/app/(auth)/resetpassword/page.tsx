@@ -1,14 +1,20 @@
 'use client'
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
 const Restpassword = () => {
    const [password, setPassword] =  useState('')
+   const [storedEmail, setStoredEmail] = useState('');
    const router = useRouter()
-   let storedEmail = localStorage.getItem('userEmailFromForgetPage'); 
    
+   useEffect(() => {
+    const email = localStorage.getItem('userEmailFromForgetPage');
+    if (email) {
+      setStoredEmail(email);
+    }
+  }, []);
    const handleSubmit =async (e:  React.MouseEvent<HTMLButtonElement>)=>{
      console.log(storedEmail);
      

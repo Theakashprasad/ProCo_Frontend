@@ -1,17 +1,34 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MdOutlineKeyboardBackspace } from "react-icons/md";
 import { useRouter } from "next/navigation";
 import Chat from "@/components/Category/AiChat/Chat";
 import Todo from "@/components/Category/Todo/toDo";
 import PomoMain from "@/components/Category/Pomodoro/PomoMain";
 
+interface User {
+  _id: string;
+  fullname: string;
+  email: string;
+  isVerified: boolean;
+  report: number;
+  isBlocked: boolean;
+  role: string;
+  // Add more fields as needed
+}
+
 const Category = () => {
-  const storedUserDetail = localStorage.getItem("userDetail");
-  const initialUserState = storedUserDetail
-    ? JSON.parse(storedUserDetail)
-    : null;
-  const [user, setUser] = useState(initialUserState);
+  const [user, setUser] = useState<User | null>();
+  useEffect(() => {
+    const storedUserDetail = localStorage.getItem("userDetail");
+    if (storedUserDetail) {
+      const initialUserState = storedUserDetail
+        ? JSON.parse(storedUserDetail)
+        : null;
+      setUser(initialUserState);
+    }
+  }, [setUser]);
+
   const [isClick, setIsClick] = useState(1);
   const router = useRouter();
 
@@ -33,7 +50,7 @@ const Category = () => {
 
               <ul className="hidden lg:flex ml-14 space-x-12">
                 <li>
-                <button
+                  <button
                     onClick={() => setIsClick(1)}
                     className={`font-sans relative group transition-transform duration-300 hover:scale-110 hover:translate-y-[-5px] ${
                       isClick === 1 ? "border-b-2 border-blue-500" : ""
@@ -44,7 +61,7 @@ const Category = () => {
                   </button>
                 </li>
                 <li>
-                <button
+                  <button
                     onClick={() => setIsClick(2)}
                     className={`font-sans relative group transition-transform duration-300 hover:scale-110 hover:translate-y-[-5px] ${
                       isClick === 2 ? "border-b-2 border-blue-500" : ""
@@ -55,7 +72,7 @@ const Category = () => {
                   </button>
                 </li>
                 <li>
-                <button
+                  <button
                     onClick={() => setIsClick(3)}
                     className={`font-sans relative group transition-transform duration-300 hover:scale-110 hover:translate-y-[-5px] ${
                       isClick === 3 ? "border-b-2 border-blue-500" : ""

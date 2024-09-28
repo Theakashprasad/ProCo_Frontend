@@ -78,18 +78,19 @@ const ProfilePage = () => {
   const [proData, setProdata] = useState<proUserData>();
   const [connectionData, setConnectionData] = useState<any>();
   //this information is form the local storage
-  const storedUserDetail = localStorage.getItem("userDetail");
-  const initialUserState = storedUserDetail
-    ? JSON.parse(storedUserDetail)
-    : null;
-  const [usersDatas, setUsersDatas] = useState(initialUserState);
+
+  const [usersDatas, setUsersDatas] = useState<User|null>();
   const [connectionIsThere, setConntectionIsThere] = useState(false);
-  // useEffect(() => {
-  //   if (params) {
-  //     const emailVal = decodeURIComponent(params.profileInfo as string);
-  //     setEmail(emailVal);
-  //   }
-  // }, [params]);
+  useEffect(() => {
+    const storedUserDetail = localStorage.getItem("userDetail");
+
+    if (storedUserDetail) {
+      const initialUserState = storedUserDetail
+        ? JSON.parse(storedUserDetail)
+        : null;
+      setUsersDatas(initialUserState);
+    }
+  }, [setUsersDatas]);
 
   function calculateAge(e: React.ChangeEvent<HTMLInputElement>) {
     // Convert the birth date string to a Date object
@@ -129,12 +130,12 @@ const ProfilePage = () => {
   ////// For the profile data when it is ist uploading
 
   useEffect(() => {
-    setEmail(usersDatas.email);
+    setEmail(usersDatas?.email);
 
     async function userData() {
       try {
         const responses = await axiosInstance.post("/api/pro/emailCheck", {
-          email: usersDatas.email,
+          email: usersDatas?.email,
         });
 
         // const responses = await axios.post(`${BASE_URL}/api/pro/emailCheck`, {
@@ -233,7 +234,7 @@ const ProfilePage = () => {
 
     const follow = "new";
     //user id
-    const senterId = usersDatas._id;
+    const senterId = usersDatas?._id;
     // professional id
     const receiverId = userData?._id;
     const res = await axios.post(
@@ -550,7 +551,6 @@ const ProfilePage = () => {
                       </div>
                     </div>
                   </div>
-                  
                 </div>
               </form>
             </div>
