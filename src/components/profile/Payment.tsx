@@ -1,4 +1,3 @@
-import useStore from "@/store/user";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { TiTick } from "react-icons/ti";
@@ -13,19 +12,33 @@ interface User {
   paymentDate: string;
 }
 
+interface UserData {
+  _id: string;
+  fullname: string;
+  email: string;
+  isVerified: boolean;
+  report: number;
+  isBlocked: boolean;
+  role: string;
+  // Add more fields as needed
+}
+
 const Payment = () => {
-  const { followId } = useStore();
   const [payment, setPayment] = useState<User | null>(null);
   const [currentPayDate, setCurrentPayDate] = useState<string | null>(null);
   const [expirationDate, setExpirationDate] = useState<string | null>(null);
 
-  const storedUserDetail = localStorage.getItem("userDetail");
-  const initialUserState = storedUserDetail
-    ? JSON.parse(storedUserDetail)
-    : null;
-  const [user, setUser] = useState(initialUserState);
+  const [user, setUser] = useState<UserData | null>();
+  useEffect(() => {
+    const storedUserDetail = localStorage.getItem("userDetail");
+    if (storedUserDetail) {
+      const initialUserState = storedUserDetail
+        ? JSON.parse(storedUserDetail)
+        : null;
+      setUser(initialUserState);
+    }
+  }, [setUser]);
 
-  const [proData, setProData] = useState<any>(null);
 
   useEffect(() => {
     const getData = async () => {

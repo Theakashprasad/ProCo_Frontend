@@ -70,13 +70,21 @@ const ProfilePage = () => {
   const [userInfo, setUserInfo] = useState<User>();
   const [modal, setModal] = useState(false);
   const router = useRouter();
-  const storedUserDetail = localStorage.getItem("userDetail");
-  const initialUserState = storedUserDetail
-    ? JSON.parse(storedUserDetail)
-    : null;
-  const [userId, setUserId] = useState(initialUserState);
+
   const [followCount, setFollowCount] = useState(0);
   const [openPsmodal, setOpenPsmodal] = useState(false);
+
+  const [userId, setUserId] = useState<User | null>();
+  useEffect(() => {
+    const storedUserDetail = localStorage.getItem("userDetail");
+    if (storedUserDetail) {
+      const initialUserState = storedUserDetail
+        ? JSON.parse(storedUserDetail)
+        : null;
+      setUserId(initialUserState);
+    }
+  }, [setUserId]);
+
   useEffect(() => {
     if (user) {
       setEmail(user?.email);
@@ -131,7 +139,7 @@ const ProfilePage = () => {
         );
         setUserData(responses.data.data);
 
-        const senterId = userId._id;
+        const senterId = userId?._id;
         const res = await axios.get(
           `http://localhost:3005/api/pro/connectionFindPro/${senterId}`,
           { withCredentials: true }
