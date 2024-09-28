@@ -1,9 +1,5 @@
 "use client";
 import { useCallback, useEffect, useRef, useState } from "react";
-import Input from "../../components/chat/Input";
-import { io, Socket } from "socket.io-client";
-import { DefaultEventsMap } from "@socket.io/component-emitter";
-import useStore from "@/store/user";
 import axios from "axios";
 import { IoIosAddCircleOutline, IoIosCloseCircle } from "react-icons/io";
 import { format } from "date-fns";
