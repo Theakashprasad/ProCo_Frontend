@@ -6,6 +6,11 @@ import axios from "axios";
 import useStore from "@/store/user";
 import { toast } from "sonner";
 
+declare global {
+  interface Window {
+    Razorpay: any;
+  }
+}
 //Ths is used as a base url for the backed req
 const BASE_URL = process.env.NEXT_PUBLIC_SERVER_URL;
 
@@ -20,6 +25,7 @@ function Payment() {
     ? JSON.parse(storedUserDetail)
     : null;
   const [usersDatas, setUsersDatas] = useState(initialUserState);
+  
   const createOrderId = async () => {
     try {
       const response = await fetch("/api/order", {
