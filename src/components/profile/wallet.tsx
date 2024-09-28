@@ -1,20 +1,34 @@
 "use client";
 import axiosInstance from "@/lib/axios";
 import React, { useEffect, useState } from "react";
-import { FaUsers, FaHistory } from "react-icons/fa";
-import { FaWallet } from "react-icons/fa";
+import { FaUsers, FaHistory, FaWallet } from "react-icons/fa";
+
+// Define types for wallet data and user history
+interface WalletData {
+  numberOfUsers: number;
+  amount: number;
+  createdAt: string;
+}
+
+interface UserHistory {
+  users: any;
+  userId: {
+    fullname: string;
+  };
+  date: string;
+}
 
 const Wallet = () => {
-  // This information is from local storage
+  // Get user details from local storage
   const storedUserDetail = localStorage.getItem("userDetail");
   const initialUserState = storedUserDetail
     ? JSON.parse(storedUserDetail)
     : null;
   const [usersData, setUsersData] = useState(initialUserState);
   const [totalAmount, setTotalAmount] = useState(0);
-  const [walletData, setWalletData] = useState([]);
+  const [walletData, setWalletData] = useState<WalletData[]>([]);
   const [isClicked, setIsClicked] = useState(false);
-  const [numOfUsers, setNumOfUsers] = useState([]);
+  const [numOfUsers, setNumOfUsers] = useState<UserHistory[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,12 +41,15 @@ const Wallet = () => {
           const res = await axiosInstance.get(
             `/api/pro/getProPaymentt/${usersData._id}`
           );
-          console.log("kashfkdjs", res.data.data);
+          console.log("Payment data:", res.data.data);
 
+          // Update wallet data and number of users
           setWalletData(response.data.data);
           setNumOfUsers(res.data.data);
+
+          // Calculate the total amount
           const totalAmount = response.data.data.reduce(
-            (total: any, payment: any) => total + payment.amount,
+            (total: number, payment: WalletData) => total + payment.amount,
             0
           );
           setTotalAmount(totalAmount);
@@ -84,7 +101,7 @@ const Wallet = () => {
 
             <div className="flex space-x-4 mb-6">
               <button
-                onClick={() => setIsClicked(true)} // Assuming 1 is the value to check for
+                onClick={() => setIsClicked(true)}
                 className={`flex-1 py-2 px-4 rounded-full flex items-center justify-center transition duration-300 ${
                   isClicked ? "bg-blue-700" : "bg-gray-600 hover:bg-blue-700"
                 } text-white`}
@@ -93,7 +110,7 @@ const Wallet = () => {
                 USERS
               </button>
               <button
-                onClick={() => setIsClicked(false)} // Assuming 1 is the value to check for
+                onClick={() => setIsClicked(false)}
                 className={`flex-1 py-2 px-4 rounded-full flex items-center justify-center transition duration-300 ${
                   isClicked ? "bg-gray-700" : "bg-blue-600 hover:bg-blue-700"
                 } text-white`}
@@ -104,12 +121,12 @@ const Wallet = () => {
             </div>
 
             {!isClicked ? (
-              <div className=" rounded-lg p-4 shadow-md my-4">
+              <div className="rounded-lg p-4 shadow-md my-4">
                 <table className="table-auto w-full">
                   <thead>
                     <tr>
                       <th className="px-4 py-2 text-left border-b-2 w-full">
-                        <h2 className="text-ml font-bold ">PAYEMNT HISTORY</h2>
+                        <h2 className="text-ml font-bold ">PAYMENT HISTORY</h2>
                       </th>
                     </tr>
                   </thead>
@@ -119,10 +136,9 @@ const Wallet = () => {
                         <td className="px-4 py-2 text-left align-top w-1/2 ">
                           <div>
                             <h2 className="text-sm">
-                              total pupils - {value.numberOfUsers}
+                              Total pupils - {value.numberOfUsers}
                             </h2>
                             <p className="text-xm text-gray-400 ">
-                              {" "}
                               {formatDate(value.createdAt)}
                             </p>
                           </div>
@@ -138,7 +154,7 @@ const Wallet = () => {
                 </table>
               </div>
             ) : (
-              <div className=" rounded-lg p-4 shadow-md my-4">
+              <div className="rounded-lg p-4 shadow-md my-4">
                 <table className="table-auto w-full">
                   <thead>
                     <tr>
@@ -148,16 +164,15 @@ const Wallet = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {numOfUsers[0].users.map((value, i) => (
+                    {numOfUsers[0]?.users.map((value:any, i:any) => (
                       <tr key={i} className="border-b w-full">
                         <td className="px-4 py-2 text-left w-1/2 ">
                           <div>
                             <h2 className="text-sm">
-                              {value.userId.fullname}{" "}
+                              {value.userId.fullname}
                             </h2>
-
                             <p className="text-xm text-gray-400 ">
-                              {formatDate(value.date)}{" "}
+                              {formatDate(value.date)}
                             </p>
                           </div>
                         </td>
@@ -166,25 +181,6 @@ const Wallet = () => {
                   </tbody>
                 </table>
               </div>
-
-              // <div className="overflow-x-auto flex-col flex justify-center items-center">
-              //   <table className="w-1/2 table-auto bg-zinc-800 rounded-lg">
-              //     <thead>
-              //       <tr className="text-left bg-zinc-700">
-              //         <th className="px-4 py-2">Users</th>
-              //         <th className="px-4 py-2">Date</th>
-              //       </tr>
-              //     </thead>
-              //     <tbody>
-              //       {numOfUsers[0].users.map((value, i) => (
-              //         <tr key={i} className="border-t border-zinc-700">
-              //           <td className="px-4 py-2">{value.userId.fullname}</td>
-              //           <td className="px-4 py-2">{formatDate(value.date)}</td>
-              //         </tr>
-              //       ))}
-              //     </tbody>
-              //   </table>
-              // </div>
             )}
           </div>
         </div>
