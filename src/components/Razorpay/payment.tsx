@@ -94,7 +94,7 @@ function Payment() {
           });
           const res = await result.json();
           if (res.isOk) {
-            const data = axios.post(`${BASE_URL}/api/payment`,{ email :user?.email, userId: usersDatas._id},)
+            const data = axios.post(`${BASE_URL}/api/payment`,{ email :user?.email, userId: usersDatas?._id},)
             toast.success("payment succeed", {
               position: "top-center",
             });
