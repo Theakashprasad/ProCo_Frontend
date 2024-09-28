@@ -102,6 +102,8 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { ZegoUIKitPrebuilt } from "@zegocloud/zego-uikit-prebuilt";
+import { ImCross } from "react-icons/im";
+import { useRouter } from "next/navigation";
 
 type Props = {
   params: {
@@ -111,6 +113,12 @@ type Props = {
 
 const Room = ({ params }: Props) => {
   const [roomId, setRoomId] = useState<string | null>(null);
+  const storedUserDetail = localStorage.getItem("userDetail");
+  const initialUserState = storedUserDetail
+    ? JSON.parse(storedUserDetail)
+    : null;
+  const [user, setUser] = useState(initialUserState);
+  const router = useRouter();
 
   useEffect(() => {
     if (params && params.Roompage) {
@@ -124,14 +132,14 @@ const Room = ({ params }: Props) => {
       const myMeeting = async (element: HTMLElement | null) => {
         if (!element) return;
 
-        const appID = 727154536;
-        const serverSecret = "f5e1ff7733db9e70ab961f59c658d932";
+        const appID = 1848568205;
+        const serverSecret = "1c278a906e7d92ea17baa911801330c4";
         const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(
           appID,
           serverSecret,
           roomId,
           Date.now().toString(),
-          "ak"
+          user.fullname
         );
         const zp = ZegoUIKitPrebuilt.create(kitToken);
         zp.joinRoom({
@@ -148,9 +156,18 @@ const Room = ({ params }: Props) => {
   }, [roomId]);
 
   return (
-    <div>
-      {roomId}
-      <div id="meeting-container" />
+    <div className="bg-[#0d0d0d] h-screen w-screen relative">
+      <div
+        id="meeting-container"
+        className="h-full w-full flex justify-center"
+      />
+      <button
+        type="submit"
+        onClick={() => router.back()}
+        className="absolute top-4 right-9 bg-red-500 text-white py-2 px-3 rounded hover:bg-red-700"
+      >
+        <ImCross />
+      </button>
     </div>
   );
 };

@@ -10,8 +10,8 @@ import { useRouter } from "next/navigation";
 import { IoIosArrowDropdown } from "react-icons/io";
 import { IoIosArrowDropup } from "react-icons/io";
 import Image from "next/image";
-import Room from "@/app/Room/page";
 import AddQuizz from "@/components/Category/Quizz/AddQuizz";
+import Room from "@/components/home/Room";
 
 interface Member {
   userId: {
@@ -30,7 +30,7 @@ interface CommunityData {
   profilePic: string;
   createdAt: string;
   updatedAt: string;
-  groupCode:string;
+  groupCode: string;
 }
 
 const Dashboard = () => {
@@ -99,9 +99,9 @@ const Dashboard = () => {
       case 1:
         return <Question userId={userId} />;
       case 2:
-        return <Room userId={userId}/>;
+        return <Room userId={userId} />;
       case 3:
-        return <AddQuizz userId={userId}/>;
+        return <AddQuizz userId={userId} />;
 
       default:
         return <Question userId={userId} />;
@@ -232,20 +232,22 @@ const Dashboard = () => {
                   <div className="absolute inset-0 bg-gradient-to-r from-blue-800 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </button>
                 <button
-  onClick={() => setIsClicked(2)}
-  className={`w-full text-left text-white p-2 rounded-md flex justify-between items-center relative overflow-hidden group ${
-    isClicked === 2 ? "bg-gradient-to-r from-purple-600 to-blue-500" : "bg-[#1b1b1b]"
-  }`}
->
-  <span className="relative z-10 flex items-center">
-    GROUP VIDEO CALL
-    {communityData?.groupCode !== null && (
-      <span className="ml-2 inline-block w-2 h-2 bg-green-500 rounded-full"></span>
-    )}
-  </span>
-  {/* <FaUsers className="relative z-10" /> */}
-  <div className="absolute inset-0 bg-gradient-to-r from-blue-800 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-</button>
+                  onClick={() => setIsClicked(2)}
+                  className={`w-full text-left text-white p-2 rounded-md flex justify-between items-center relative overflow-hidden group ${
+                    isClicked === 2
+                      ? "bg-gradient-to-r from-purple-600 to-blue-500"
+                      : "bg-[#1b1b1b]"
+                  }`}
+                >
+                  <span className="relative z-10 flex items-center">
+                    GROUP VIDEO CALL
+                    {communityData?.groupCode !== null && (
+                      <span className="ml-2 inline-block w-2 h-2 bg-green-500 rounded-full"></span>
+                    )}
+                  </span>
+                  {/* <FaUsers className="relative z-10" /> */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-800 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </button>
 
                 <button
                   onClick={() => setIsClicked(3)}

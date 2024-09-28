@@ -3,6 +3,7 @@ import axiosInstance from "@/lib/axios";
 import useStore from "@/store/user";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import { ImCross } from "react-icons/im";
 
 type props = {
   userId: string;
@@ -18,6 +19,7 @@ const Room = ({ userId }: props) => {
     : null;
   const [user, setUser] = useState(initialUserState);
   const [groupCode, setGroupCode] = useState(null);
+
   useEffect(() => {
     const fetchData = async () => {
       const proUserData = await axiosInstance.get(
@@ -50,6 +52,28 @@ const Room = ({ userId }: props) => {
     ev.preventDefault();
     if (groupCode) router.push(`/Room/${encodeURIComponent(groupCode)}`);
   };
+
+  
+  const handleCancle = async () => {
+    const data = {
+      groupCode: null,
+      communityId: userId,
+    };
+    console.log(data);
+
+    try {
+      if (user.role == "profesional") {
+        const proUserData = await axiosInstance.post(
+          "/api/pro/groupCode",
+          data
+        );
+      }
+      router.back();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="flex items-center justify-center w-[100%] h-screen bg-[#0d0d0d] ">
       {user.role == "profesional" ? (
@@ -57,6 +81,13 @@ const Room = ({ userId }: props) => {
           onSubmit={handleSubmit}
           className=" p-6 rounded shadow-md w-80 border border-gray-600"
         >
+          <button
+            type="submit"
+            onClick={handleCancle}
+            className="absolute top-4 right-9 bg-red-500 text-white py-2 px-3 rounded hover:bg-red-700"
+          >
+            <ImCross />
+          </button>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
               Enter Room code

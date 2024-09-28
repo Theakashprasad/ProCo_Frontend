@@ -16,7 +16,6 @@ import { useRouter } from "next/navigation";
 import axiosInstance from "@/lib/axios";
 import { toast } from "sonner";
 
-const BASE_URL = process.env.NEXT_PUBLIC_SERVER_URL;
 
 type creator = {
   _id: any;
