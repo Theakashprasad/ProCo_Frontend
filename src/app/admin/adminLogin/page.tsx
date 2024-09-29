@@ -5,10 +5,12 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
+const BASE_URL = process.env.NEXT_PUBLIC_SERVER_URL;
+
 const Adminlogin = () => {
   const router = useRouter();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [formData, setFormData] = useState({ email: '', password: '' });
+  const [formData, setFormData] = useState({ email: "", password: "" });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -18,8 +20,9 @@ const Adminlogin = () => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        "http://localhost:3005/api/admin/adminLogin",
-        formData,{withCredentials:true}
+        `${BASE_URL}/api/admin/adminLogin`,
+        formData,
+        { withCredentials: true }
       );
       router.push("/admin/dashboard");
       if (res.data.success) {
