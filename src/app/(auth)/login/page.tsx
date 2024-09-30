@@ -1,6 +1,5 @@
 "use client";
 import axios from "axios";
-import Lottie from "lottie-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
