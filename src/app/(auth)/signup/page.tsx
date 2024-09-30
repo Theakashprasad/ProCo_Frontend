@@ -202,9 +202,7 @@ const Signup = () => {
               </span>
             </div>
           </form>
-          {/* <div className="mt-4 flex justify-center">
-            <SignInBtn />
-          </div> */}
+      
         </div>
       </div>
       <div className=" absolute bottom-[4rem] right-[27rem] transform translate-x-12">

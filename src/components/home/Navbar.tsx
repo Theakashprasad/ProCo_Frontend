@@ -1,15 +1,11 @@
 "use client";
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
-// import { navItems } from "../constants";
-import Image from "next/image";
 import Link from "next/link";
-import { signOut } from "next-auth/react";
 import React from "react";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import useDataMain from "@/Hook/blockCheck";
-import Payment from "../Razorpay/payment";
 import useStore from "@/store/user";
 import useUser from "@/Hook/useUser";
 import { CgProfile } from "react-icons/cg";
@@ -48,7 +44,6 @@ const Navbar = () => {
     // Remove the cookie
     // localStorage.clear();
     Cookies.remove("access_token"); // Replace 'authToken' with the name of your cookie
-    signOut();
     // Redirect to login page or home page
     router.push("/login"); // Adjust the path as needed
   };
