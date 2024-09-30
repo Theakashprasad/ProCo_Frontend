@@ -166,31 +166,6 @@ const Signup = () => {
             >
               Sign up
             </button>
-
-            {/* <div className="mt-4 flex justify-center">
-              <a className="mx-2 flex items-center" href="#">
-                <img
-                  className="h-12 w-12 object-contain"
-                  src="https://img.icons8.com/color/48/000000/google-logo.png"
-                  alt="Google"
-                />
-              </a>
-              <a className="mx-2 flex items-center" href="#">
-                <img
-                  className="h-12 w-12 object-contain"
-                  src="https://img.icons8.com/color/48/000000/facebook-new.png"
-                  alt="Facebook"
-                />
-              </a>
-              <a className="mx-2 flex items-center" href="#">
-                <img
-                  className="h-12 w-12 object-contain"
-                  src="https://img.icons8.com/nolan/64/github.png"
-                  alt="GitHub"
-                />
-              </a>
-            </div> */}
-
             <div className="mt-4 text-center">
               <span className="text-sm text-white hover:underline">
                 Already have an account?{" "}
