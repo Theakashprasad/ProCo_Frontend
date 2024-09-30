@@ -4,14 +4,10 @@ import { Typography } from "@mui/material";
 import RightSideBar from "./RightSideBar";
 import RighBarUser from "./RighBarUser";
 import Community from "./Community";
-import GroupChat from "./Question";
-import Payment from "../Razorpay/payment";
 import { GoFileMedia } from "react-icons/go";
 import { FaUsers } from "react-icons/fa6";
 import Link from "next/link";
-import { IoPeopleSharp } from "react-icons/io5";
 import { IoChatboxEllipsesOutline } from "react-icons/io5";
-import withProtectedRoute from "@/app/protectedRoute";
 
 const LeftSideBar = () => {
   const [isClicked, setIsClicked] = useState(1);

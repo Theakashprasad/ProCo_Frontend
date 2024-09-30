@@ -8,9 +8,6 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import useStore from "@/store/user";
-import SignInBtn from "../../../components/signInGoogle";
-import { useSession } from "next-auth/react";
 import animationData from "../../../assets/Professional.json";
 import Lottie from "lottie-react";
 
@@ -19,26 +16,9 @@ const BASE_URL = process.env.NEXT_PUBLIC_SERVER_URL;
 
 const Signup = () => {
   const router = useRouter();
-  const setRoles = useStore((state) => state.setRole);
   const [isHovered, setIsHovered] = useState(false);
   const [isOn, setIsOn] = useState(false);
   const [role, setRole] = useState("user");
-  let { status, data: session } = useSession();
-  useEffect(() => {
-    localStorage.setItem("role", role);
-    console.log("ddd", session);
-    const formdata = session?.user;
-    let userRole = localStorage.getItem("role");
-    const dataWithRole = { ...formdata, userRole };
-    console.log(dataWithRole);
-    if (status === "authenticated") {
-      const data = axios.post(`${BASE_URL}/api/google`, dataWithRole, {
-        withCredentials: true,
-      });
-      console.log(data);
-      router.replace("/");
-    }
-  }, [session, role, status, router]);
 
   const toggle = () => {
     setIsOn(!isOn);
