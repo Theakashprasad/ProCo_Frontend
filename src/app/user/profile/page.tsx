@@ -76,11 +76,13 @@ const ProfilePage = () => {
 
   const [userId, setUserId] = useState<User | null>();
   useEffect(() => {
-    const storedUserDetail = typeof window !== "undefined" ? localStorage.getItem("userDetail") : null;
+    const storedUserDetail = localStorage.getItem("userDetail");
     if (storedUserDetail) {
       const initialUserState = storedUserDetail
         ? JSON.parse(storedUserDetail)
         : null;
+        console.log("initialUserState",initialUserState);
+        
       setUserId(initialUserState);
     }
   }, [setUserId]);
@@ -110,7 +112,6 @@ const ProfilePage = () => {
       ageOfUser--;
     }
     setAge(ageOfUser);
-    // console.log(ageOfUser);
   }
 
   const {
@@ -204,8 +205,6 @@ const ProfilePage = () => {
       } else {
         console.log("An unexpected error occurred:", error);
       }
-
-      console.log(error);
     }
   };
   const [isClicked, setIsClicked] = useState(1);
