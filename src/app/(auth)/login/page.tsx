@@ -20,7 +20,7 @@ const LoginPage = () => {
       });
     }
     try {
-      const response = await axios.post("https://api.proco.life/api/login", { email, password }, {
+      const response = await axios.post(`${BASE_URL}/api/login`, { email, password }, {
         withCredentials: true,
       });
       if (response.data.success) {
