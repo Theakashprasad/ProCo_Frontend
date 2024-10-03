@@ -37,7 +37,7 @@ interface Chat {
 }
 
 const Page = () => {
-  const storedUserDetail = localStorage.getItem("userDetail");
+  const storedUserDetail = typeof window !== "undefined" ? localStorage.getItem("userDetail") : null;
   const initialUserState = storedUserDetail
     ? JSON.parse(storedUserDetail)
     : null;

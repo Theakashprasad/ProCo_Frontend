@@ -25,7 +25,7 @@ const RightSideBar = () => {
   const [blogs, setBlogs] = useState<any[]>([]);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
-  const storedUserDetail = localStorage.getItem("userDetail");
+  const storedUserDetail = typeof window !== "undefined" ? localStorage.getItem("userDetail") : null;
   const [currentLikedUsers, setCurrentLikedUsers] = useState([]);
   const initialUserState = storedUserDetail
     ? JSON.parse(storedUserDetail)

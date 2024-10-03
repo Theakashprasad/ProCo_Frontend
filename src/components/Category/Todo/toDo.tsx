@@ -32,7 +32,7 @@ function Todo() {
   const [editText, setEditText] = useState<string>("");
   const [edit, setEdit] = useState(false);
   const { theme } = useTheme();
-  const storedUserDetail = localStorage.getItem("userDetail");
+  const storedUserDetail = typeof window !== "undefined" ? localStorage.getItem("userDetail") : null;
   const initialUserState = storedUserDetail
     ? JSON.parse(storedUserDetail)
     : null;

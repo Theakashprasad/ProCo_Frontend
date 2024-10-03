@@ -8,7 +8,7 @@ const BASE_URL = process.env.NEXT_PUBLIC_SERVER_URL;
 
 const ChangePassword = () => {
   const modalRefChangePs = useRef<HTMLDialogElement>(null);
-  const storedUserDetail = localStorage.getItem("userDetail");
+  const storedUserDetail = typeof window !== "undefined" ? localStorage.getItem("userDetail") : null;
   const initialUserState = storedUserDetail
     ? JSON.parse(storedUserDetail)
     : null;

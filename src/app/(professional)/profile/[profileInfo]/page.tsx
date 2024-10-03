@@ -81,7 +81,7 @@ const ProfilePage = ({ params }: Props) => {
   const [proData, setProdata] = useState<proUserData>();
   const [connectionData, setConnectionData] = useState<any>();
   //this information is form the local storage
-  const storedUserDetail = localStorage.getItem("userDetail");
+  const storedUserDetail = typeof window !== "undefined" ? localStorage.getItem("userDetail") : null;
   const initialUserState = storedUserDetail
     ? JSON.parse(storedUserDetail)
     : null;

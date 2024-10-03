@@ -14,7 +14,7 @@ const BASE_URL = process.env.NEXT_PUBLIC_SERVER_URL;
 const Connection = () => {
   const { followId } = useStore();
   const [followerData, setFollowerData] = useState<any[]>([]);
-  const storedUserDetail = localStorage.getItem("userDetail");
+  const storedUserDetail = typeof window !== "undefined" ? localStorage.getItem("userDetail") : null;
   const initialUserState = storedUserDetail
     ? JSON.parse(storedUserDetail)
     : null;

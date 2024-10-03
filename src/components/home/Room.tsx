@@ -13,7 +13,7 @@ const Room = ({ userId }: props) => {
   const [roomCode, setRoomCode] = useState("");
   const router = useRouter();
   const { setCommunityId } = useStore();
-  const storedUserDetail = localStorage.getItem("userDetail");
+  const storedUserDetail = typeof window !== "undefined" ? localStorage.getItem("userDetail") : null;
   const initialUserState = storedUserDetail
     ? JSON.parse(storedUserDetail)
     : null;

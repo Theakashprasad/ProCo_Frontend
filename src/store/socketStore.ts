@@ -88,7 +88,7 @@ export const useSocketStore = create<iSocketState>((set, get) => ({
   },
 
   handleCall: async (receiverUser) => {
-    const storedUserDetail = localStorage.getItem("userDetail");
+    const storedUserDetail = typeof window !== "undefined" ? localStorage.getItem("userDetail") : null;
     const initialUserState = storedUserDetail
       ? JSON.parse(storedUserDetail)
       : null;
@@ -309,7 +309,7 @@ export const useSocketStore = create<iSocketState>((set, get) => ({
   },
 
   initializeSocket: () => {
-    const storedUserDetail = localStorage.getItem("userDetail");
+    const storedUserDetail = typeof window !== "undefined" ? localStorage.getItem("userDetail") : null;
     const initialUserState = storedUserDetail
       ? JSON.parse(storedUserDetail)
       : null;
