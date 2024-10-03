@@ -41,8 +41,10 @@ const Navbar = () => {
   const router = useRouter();
 
   const handleLogout = () => {
-    // Remove the cookie
-    localStorage.clear();
+    if (typeof window !== "undefined") {
+      // Remove the cookie
+      localStorage.clear();
+    }
     Cookies.remove("access_token"); 
     // Redirect to login page or home page
     router.push("/login"); // Adjust the path as needed
