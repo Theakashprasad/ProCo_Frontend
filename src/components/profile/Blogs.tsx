@@ -1,3 +1,5 @@
+"use client";
+
 import axiosInstance from "@/lib/axios";
 import React, { useCallback, useEffect, useState } from "react";
 import { Avatar, Typography, Card, CardContent } from "@mui/material";

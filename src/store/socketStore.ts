@@ -1,3 +1,5 @@
+'use client'
+
 import { io, Socket } from "socket.io-client";
 import { create } from "zustand";
 import { OngoingCall, Participants, PeerData, User } from "@/Types/chat";

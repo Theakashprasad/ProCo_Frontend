@@ -1,3 +1,4 @@
+"use client";
 import useStore from "@/store/user";
 import { Typography } from "@mui/material";
 import axios from "axios";
