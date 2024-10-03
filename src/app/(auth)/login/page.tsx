@@ -37,7 +37,7 @@ const LoginPage = () => {
             "userDetail",
             JSON.stringify(response.data.data)
           );
-          // router.replace("/");
+          router.replace("/");
         } else {
           localStorage.setItem("ProEmail", response.data.data.email);
           localStorage.removeItem("userEmailFromForgetPage"); // Remove the userEmail from localStorage

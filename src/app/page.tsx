@@ -16,4 +16,5 @@ const home = function Home() {
   );
 };
 
-export default withProtectedRoute(home);
+export default home
+

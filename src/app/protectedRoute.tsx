@@ -16,7 +16,7 @@ const withProtectedRoute = <P extends object>(
 
       console.log('checking if the token exist or not', JwtToken);
       
-      if (!token || !JwtToken) {
+      if (!JwtToken) {
         router.push("/login");
       } else {
         setIsLoading(false);
