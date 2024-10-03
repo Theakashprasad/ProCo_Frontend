@@ -12,8 +12,11 @@ const ForgetPassword = () => {
   const router = useRouter();
   const handleSubmit = async (e: FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    localStorage.setItem("userEmailFromForgetPage", email);
-    localStorage.removeItem("userEmailFromSignUpPage"); // Remove the userEmail from localStorage
+    if (typeof window !== "undefined") {
+      localStorage.setItem("userEmailFromForgetPage", email);
+      localStorage.removeItem("userEmailFromSignUpPage"); // Remove the userEmail from localStorage
+    }
+
     try {
       const response = await axios.post(`${BASE_URL}/api/forgetPassword`, {
         email,
