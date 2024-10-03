@@ -12,6 +12,8 @@ const withProtectedRoute = <P extends object>(
     const [isLoading, setIsLoading] = useState(true); 
     useEffect(() => {
       const token = Cookies.get("access_token");
+      console.log('checking if the token exist or not', token);
+      
       if (!token) {
         router.push("/login");
       } else {
