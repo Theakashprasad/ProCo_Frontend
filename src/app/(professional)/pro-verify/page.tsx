@@ -14,7 +14,7 @@ import Cookies from "js-cookie";
 const BASE_URL = process.env.NEXT_PUBLIC_SERVER_URL;
 
 export default function Pro_verify() {
-  const [storedEmail, setStoredEmail] = useState('');
+  const [storedEmail, setStoredEmail] = useState("");
   useEffect(() => {
     let storedEmail = localStorage.getItem("ProEmail") ?? "";
     if (storedEmail) {
@@ -67,6 +67,9 @@ export default function Pro_verify() {
       );
 
       if (response.data.success) {
+        if (typeof window !== "undefined") {
+          localStorage.clear();
+        }
         Cookies.remove("access_token"); // Replace 'authToken' with the name of your cookie
         router.replace("/standBy");
         toast.success("REQUEST SENT", {

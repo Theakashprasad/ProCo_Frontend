@@ -28,6 +28,7 @@ const Navbar = () => {
   const { user } = useUser();
   const { userDatas } = useDataMain();
   const [userInfo, setUserInfo] = useState<User>();
+console.log("userdata,",user);
 
   useEffect(() => {
     if (userDatas) {

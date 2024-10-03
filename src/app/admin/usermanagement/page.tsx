@@ -75,6 +75,9 @@ const userManagement = function UserManagement() {
           toast.error(`user has been ${action}`, {
             position: "top-center",
           });
+          if (typeof window !== "undefined") {
+            localStorage.removeItem("jwtToken"); // Remove the userEmail from localStorage
+          }
           Cookies.remove("access_token"); // Replace 'authToken' with the name of your cookie
           setUsers((prevUsers) =>
             prevUsers.map((user) =>

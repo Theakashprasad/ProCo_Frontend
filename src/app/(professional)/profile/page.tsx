@@ -83,7 +83,6 @@ const ProfilePage = () => {
   const [connectionIsThere, setConntectionIsThere] = useState(false);
   useEffect(() => {
     const storedUserDetail = typeof window !== "undefined" ? localStorage.getItem("userDetail") : null;
-
     if (storedUserDetail) {
       const initialUserState = storedUserDetail
         ? JSON.parse(storedUserDetail)
