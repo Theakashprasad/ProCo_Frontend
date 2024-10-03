@@ -42,8 +42,8 @@ const Navbar = () => {
 
   const handleLogout = () => {
     // Remove the cookie
-    // localStorage.clear();
-    // Cookies.remove("access_token"); // Replace 'authToken' with the name of your cookie
+    localStorage.clear();
+    Cookies.remove("access_token"); 
     // Redirect to login page or home page
     router.push("/login"); // Adjust the path as needed
   };

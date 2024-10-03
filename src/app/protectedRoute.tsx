@@ -11,10 +11,12 @@ const withProtectedRoute = <P extends object>(
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(true); 
     useEffect(() => {
-      const token = Cookies.get("access_token");
-      console.log('checking if the token exist or not', token);
+      const token = Cookies.get("access_token");  
+      const JwtToken = localStorage.getItem("jwtToken");
+
+      console.log('checking if the token exist or not', JwtToken);
       
-      if (!token) {
+      if (!token || !JwtToken) {
         router.push("/login");
       } else {
         setIsLoading(false);

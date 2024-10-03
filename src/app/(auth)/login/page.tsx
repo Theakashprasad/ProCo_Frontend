@@ -20,19 +20,24 @@ const LoginPage = () => {
       });
     }
     try {
-      const response = await axios.post(`${BASE_URL}/api/login`, { email, password }, {
-        withCredentials: true,
-      });
+      const response = await axios.post(
+        `${BASE_URL}/api/login`,
+        { email, password },
+        {
+          withCredentials: true,
+        }
+      );
       if (response.data.success) {
         toast.success("LOGIN IS VERIFIED", {
           position: "top-center",
         });
-        if (response.data.data.role == "user") {
+        if (response.data.data.role == "user") {          
+          localStorage.setItem("jwtToken", JSON.stringify(response.data.token));
           localStorage.setItem(
             "userDetail",
             JSON.stringify(response.data.data)
           );
-          router.replace("/");
+          // router.replace("/");
         } else {
           localStorage.setItem("ProEmail", response.data.data.email);
           localStorage.removeItem("userEmailFromForgetPage"); // Remove the userEmail from localStorage
@@ -77,7 +82,7 @@ const LoginPage = () => {
 
   return (
     <div className="bg-black flex items-center justify-center min-h-screen relative overflow-hidden">
-        <div className="absolute top-4 left-4">
+      <div className="absolute top-4 left-4">
         <span className="text-xl font-serif tracking-tight font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-blue-500 shadow-lg hover:shadow-2xl transition-shadow duration-300 ease-in-out hover:from-purple-700 hover:to-blue-700">
           ProCo .
         </span>
