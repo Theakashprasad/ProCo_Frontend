@@ -46,7 +46,7 @@ const LoginPage = () => {
             email: email,
           });
           if (data.data.success) {
-            console.log(data.data.data.request);
+            console.log('ksafasdf',data.data.data.request);
             if (data.data.data.request) {
               localStorage.setItem(
                 "userDetail",
