@@ -17,6 +17,7 @@ const withProtectedRoute = <P extends object>(
       console.log('checking if the token exist or not', JwtToken);
       
       if (!JwtToken) {
+        localStorage.removeItem("jwtToken"); 
         router.push("/login");
       } else {
         setIsLoading(false);
