@@ -24,8 +24,12 @@ const Adminlogin = () => {
         formData,
         { withCredentials: true }
       );
-      router.push("/admin/dashboard");
       if (res.data.success) {
+        localStorage.setItem(
+          "adminToken",
+          JSON.stringify(res.data.token)
+        );
+        router.push("/admin/dashboard");
         toast.success("LOGIN IS VERIFIED", {
           position: "top-center",
         });

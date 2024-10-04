@@ -47,7 +47,7 @@ interface iSocketState {
     sdp: SignalData;
     ongoingCall: OngoingCall;
     isCaller: boolean;
-  }) => void;
+  }) => void;        
 }
 
 export const useSocketStore = create<iSocketState>((set, get) => ({
@@ -374,6 +374,7 @@ export const useSocketStore = create<iSocketState>((set, get) => ({
     socket?.emit("join chat", { chatId });
   },
 
+  //to sent messaeg to backend in realy time
   emitChatMessage(messageData) {
     console.log("emitting");
     const { socket } = get();

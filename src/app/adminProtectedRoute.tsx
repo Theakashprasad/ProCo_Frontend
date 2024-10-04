@@ -3,6 +3,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { ComponentType } from "react";
+import { jwtDecode } from "jwt-decode";
 
 const adminProtectedRoute = <P extends object>(
   WrappedComponent: ComponentType<P>
@@ -12,11 +13,23 @@ const adminProtectedRoute = <P extends object>(
     const [isLoading, setIsLoading] = useState(true); 
     useEffect(() => {
       const token = Cookies.get("access_Admin_token");
-      if (!token) {
+      const JwtToken = localStorage.getItem("adminToken");
+      if (!JwtToken) {
+        localStorage.removeItem("jwtToken");
        return router.push("/admin/adminLogin");
       } else {
-        setIsLoading(false);
-      }
+        const decodedToken = jwtDecode(JwtToken); // Decode the JWT token
+        const currentTime = Date.now() / 1000; // Current time in seconds (JWT exp is in seconds)
+        console.log("decodedToken", decodedToken, currentTime);
+
+        if (decodedToken?.exp && decodedToken.exp < currentTime) {
+          localStorage.setItem("ProEmail", "");
+          localStorage.removeItem("jwtToken");
+          router.push("/login");
+        } else {
+          // Token is still valid
+          setIsLoading(false);
+        }      }
     }, [router]);
 
     if (isLoading) {

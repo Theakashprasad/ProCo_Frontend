@@ -86,7 +86,7 @@ const CheckChat: React.FC<CheckChatProps> = ({
 
   useEffect(() => {
     if (socket) {
-      const handleChatMessage = (message: Message) => {
+      const  handleChatMessage = (message: Message) => {
         if (message.senderId === otherUserId) {
           setMessages((prevMessages) => [...prevMessages, message]);
 
