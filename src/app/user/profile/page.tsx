@@ -68,7 +68,6 @@ const ProfilePage = () => {
   const [email, setEmail] = useState<string | undefined>();
   const { userDatas } = useDataMain();
   const [userInfo, setUserInfo] = useState<User>();
-  const [modal, setModal] = useState(false);
   const router = useRouter();
 
   const [followCount, setFollowCount] = useState(0);
@@ -89,10 +88,10 @@ const ProfilePage = () => {
 
   useEffect(() => {
     if (user) {
-      setEmail(user?.email);
+      setEmail(userId?.email);
       setUserInfo(userDatas);
     }
-  }, [user, setUserInfo, userDatas]);
+  }, [userId, setUserInfo, userDatas]);
 
   function calculateAge(e: React.ChangeEvent<HTMLInputElement>) {
     // Convert the birth date string to a Date object

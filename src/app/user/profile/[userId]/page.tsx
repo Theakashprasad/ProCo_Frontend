@@ -113,15 +113,9 @@ const ProfilePage = () => {
   useEffect(() => {
     async function userData() {
       try {
-        // const responses = await axios.post(
-        //   `${BASE_URL}/api/userData`,
-        //   { withCredentials: true }
-        // );
-
         const responses = await axiosInstance.post("/api/userProfileData", {
           userId,
         });
-
         setUserData(responses.data.data);
         setUserInfo(responses.data.userData);
         
