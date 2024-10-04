@@ -32,7 +32,6 @@ const LoginPage = () => {
           position: "top-center",
         });
         if (response.data.data.role == "user") {          
-          localStorage.setItem("jwtToken", JSON.stringify(response.data.token));
           localStorage.setItem(
             "userDetail",
             JSON.stringify(response.data.data)
@@ -46,12 +45,12 @@ const LoginPage = () => {
             email: email,
           });
           if (data.data.success) {
-            console.log('ksafasdf',data.data.data);
             if (data.data.data.request) {
               localStorage.setItem(
                 "userDetail",
                 JSON.stringify(response.data.data)
               );
+              localStorage.setItem("jwtToken", JSON.stringify(response.data.token));
               router.replace("/");
             } else {
               router.replace("/standBy");
