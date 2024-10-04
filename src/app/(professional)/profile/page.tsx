@@ -158,7 +158,7 @@ const ProfilePage = () => {
         console.log(senterId);
 
         const res = await axios.get(
-          `http://localhost:3005/api/pro/connectionFindUser/${senterId}`
+          `${BASE_URL}/api/pro/connectionFindUser/${senterId}`
         );
         // const hasReceiverId = res.data.data.some((item: { receiverId: any; }) => item.receiverId === responses.data.data._id);
         console.log("res.data.data", res.data.data);
@@ -237,7 +237,7 @@ const ProfilePage = () => {
     // professional id
     const receiverId = userData?._id;
     const res = await axios.post(
-      `http://localhost:3005/api/pro/connection/${senterId}/${follow}/${receiverId}`
+      `${BASE_URL}/api/pro/connection/${senterId}/${follow}/${receiverId}`
     );
     toast.success("REQUEST SENT", {
       position: "top-center",

@@ -120,10 +120,11 @@ const ProfilePage = () => {
         setUserInfo(responses.data.userData);
         
         const senterId = userId.userId;
-        const res = await axios.get(
-          `http://localhost:3005/api/pro/connectionFindPro/${senterId}`,
-          { withCredentials: true }
-        );
+        const res = await axiosInstance.get( `/api/pro/connectionFindPro/${senterId}`,);
+        // const res = await axios.get(
+        //   `http://localhost:3005/api/pro/connectionFindPro/${senterId}`,
+        //   { withCredentials: true }
+        // );
         console.log("responses.data.data", res.data);
 
         const countAccepts = res.data.data.filter(

@@ -145,10 +145,6 @@ const ProfilePage = ({ params }: Props) => {
         const responses = await axiosInstance.post("/api/pro/emailCheck", {
           email: emailVal,
         });
-
-        // const responses = await axios.post(`${BASE_URL}/api/pro/emailCheck`, {
-        //   email: emailVal,
-        // });
         setUserData(responses.data.data);
         const Prodata = await axiosInstance.post("/api/proData", {
           email: email,
@@ -167,7 +163,7 @@ const ProfilePage = ({ params }: Props) => {
         console.log(senterId);
 
         const res = await axios.get(
-          `http://localhost:3005/api/pro/connectionFindUser/${senterId}`
+          `${BASE_URL}/api/pro/connectionFindUser/${senterId}`
         );
         // const hasReceiverId = res.data.data.some((item: { receiverId: any; }) => item.receiverId === responses.data.data._id);
         console.log("res.data.data", res.data.data);
@@ -246,7 +242,7 @@ const ProfilePage = ({ params }: Props) => {
     // professional id
     const receiverId = userData?._id;
     const res = await axios.post(
-      `http://localhost:3005/api/pro/connection/${senterId}/${follow}/${receiverId}`
+      `${BASE_URL}/api/pro/connection/${senterId}/${follow}/${receiverId}`
     );
     toast.success("REQUEST SENT", {
       position: "top-center",

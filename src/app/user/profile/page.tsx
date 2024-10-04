@@ -132,6 +132,8 @@ const ProfilePage = () => {
   useEffect(() => {
     async function userData() {
       try {
+        console.log("email from profile", email);
+        
         const responses = await axios.post(
           `${BASE_URL}/api/userData`,
           { email: email },
@@ -140,10 +142,11 @@ const ProfilePage = () => {
         setUserData(responses.data.data);
 
         const senterId = userId?._id;
-        const res = await axios.get(
-          `http://localhost:3005/api/pro/connectionFindPro/${senterId}`,
-          { withCredentials: true }
-        );
+        const res = await axiosInstance.get(`/api/pro/connectionFindPro/${senterId}`);
+        // const res = await axios.get(
+        //   `http://localhost:3005/api/pro/connectionFindPro/${senterId}`,
+        //   { withCredentials: true }
+        // );
         const countAccepts = res.data.data.filter(
           (item: { follow: string }) => item.follow === "accept"
         ).length;

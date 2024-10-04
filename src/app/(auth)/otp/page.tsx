@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import { FormEvent, useEffect, useState } from "react";
 import { toast } from "sonner";
 
+const BASE_URL = process.env.NEXT_PUBLIC_SERVER_URL;
+
 const Otp = () => {
   const router = useRouter();
   const [otp, setOtp] = useState("");
@@ -36,7 +38,7 @@ const Otp = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:3005/api/otp", {
+      const response = await axios.post(`${BASE_URL}/api/otp`, {
         otp,
         storedEmail,
       });
@@ -74,7 +76,7 @@ const Otp = () => {
   const resentHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:3005/api/resentOtp", {
+      const response = await axios.post(`${BASE_URL}/api/resentOtp`, {
         storedEmail,
       });
       console.log(response);

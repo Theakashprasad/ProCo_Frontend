@@ -21,6 +21,9 @@ import {
 import Swal from "sweetalert2";
 import axiosInstance from "@/lib/adminAxios";
 
+const BASE_URL = process.env.NEXT_PUBLIC_SERVER_URL;
+
+
 interface User {
   _id: string;
   email: string;
@@ -45,7 +48,7 @@ const UserManagement = () => {
 
   useEffect(() => {
     const updatauser = async () => {
-      const res = await axios.get("http://localhost:3005/api/pro/Allblogs");
+      const res = await axios.get(`${BASE_URL}/api/pro/Allblogs`);
       console.log("res", res.data.data);
       setUsers(res.data.data);
     };

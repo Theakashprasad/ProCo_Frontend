@@ -7,6 +7,7 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { TiTick } from "react-icons/ti";
 import { IoMdClose } from "react-icons/io";
+import axiosInstance from "@/lib/axios";
 
 const BASE_URL = process.env.NEXT_PUBLIC_SERVER_URL;
 
@@ -18,19 +19,15 @@ const UserProfile = () => {
     ? JSON.parse(storedUserDetail)
     : null;
   const [user, setUser] = useState(initialUserState);
-  // this id the data of professional ( verfy )
-  const [proData, setProData] = useState<any>();
-  console.log("user", user);
-  // console.log("followerData", followerData);
-  // console.log("proData", proData);
 
   useEffect(() => {
     const getData = async () => {
       try {
         const senterId = user._id;
-        const res = await axios.get(
-          `http://localhost:3005/api/pro/connectionFindPro/${senterId}`
-          ,{withCredentials:true});
+        const res = await axiosInstance.get(`api/pro/connectionFindPro/${senterId}`);
+        // const res = await axios.get(
+        //   `http://localhost:3005/api/pro/connectionFindPro/${senterId}`
+        //   ,{withCredentials:true});
         console.log("res.data.data",res.data.data);
         setFollowerData(res.data.data || []);
       } catch (error) {

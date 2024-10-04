@@ -18,6 +18,8 @@ import Image from "next/image";
 import AdminLayout from "@/components/Admin/AdminLayout";
 import Swal from "sweetalert2";
 
+const BASE_URL = process.env.NEXT_PUBLIC_SERVER_URL;
+
 interface User {
   _id: string;
   fullname: string;
@@ -40,7 +42,7 @@ const UserManagement = () => {
 
   useEffect(() => {
     const updatauser = async () => {
-      const res = await axios.get("http://localhost:3005/api/user");
+      const res = await axios.get(`${BASE_URL}/api/user`);
       setUsers(res.data.data);
     };
     updatauser();
@@ -70,7 +72,7 @@ const UserManagement = () => {
 
         const action = isBlocked ? "unblock" : "block";
         const res = await axios.post(
-          `http://localhost:3005/api/block/${userId}/${action}`
+          `${BASE_URL}/api/block/${userId}/${action}`
         );
         console.log(action, typeof userId);
         toast.error(`user has been ${action}`, {

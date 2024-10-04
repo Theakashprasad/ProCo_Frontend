@@ -20,6 +20,9 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import AdminLayout from "@/components/Admin/AdminLayout";
 
+const BASE_URL = process.env.NEXT_PUBLIC_SERVER_URL;
+
+
 interface User {
   achievements: string;
   email: string;
@@ -38,7 +41,7 @@ const ReqManagement = () => {
 
   useEffect(() => {
     const updatauser = async () => {
-      const res = await axios.get("http://localhost:3005/api/pro/user");
+      const res = await axios.get(`${BASE_URL}/api/pro/user`);
       // console.log("val", res);
       setUsers(res.data.data);
     };
@@ -60,7 +63,7 @@ const ReqManagement = () => {
       if (value == "accept") {
         const action = true;
         const res = await axios.post(
-          `http://localhost:3005/api/pro/verifyDoc/${userId}/${action}`
+          `${BASE_URL}/api/pro/verifyDoc/${userId}/${action}`
         );
         toast.success("user has been verified", {
           position: "top-center",

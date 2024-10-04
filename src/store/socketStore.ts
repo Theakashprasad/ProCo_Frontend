@@ -7,6 +7,8 @@ import Peer, { SignalData } from "simple-peer";
 import { useState } from "react";
 import axiosInstance from "@/lib/axios";
 
+const BASE_URL = process.env.NEXT_PUBLIC_SERVER_URL;
+
 interface iSocketState {
   socket: Socket | null;
   isSocketConnected: boolean;
@@ -323,7 +325,7 @@ export const useSocketStore = create<iSocketState>((set, get) => ({
       return;
     }
 
-    const newSocket = io("http://localhost:3005");
+    const newSocket = io(`${BASE_URL}`);
     console.log("connecting");
     set({ socket: newSocket });
 

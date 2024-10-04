@@ -9,6 +9,9 @@ import axiosInstance from "@/lib/adminAxios";
 import { RiMoneyDollarCircleFill } from "react-icons/ri";
 import ProGraph from "@/components/Admin/ProChart";
 
+const BASE_URL = process.env.NEXT_PUBLIC_SERVER_URL;
+
+
 interface User {
   _id: string;
   fullname: string;
@@ -33,7 +36,7 @@ const UserManagement = () => {
   useEffect(() => {
     const updatauser = async () => {
       const responses = await axiosInstance.get("/api/admin/getPayment");
-      const res = await axios.get("http://localhost:3005/api/user");
+      const res = await axios.get(`${BASE_URL}/api/user`);
       // this is for the amount admin and pro recived
       const value = responses.data.data.length;
       const total = value * 500; // Calculate the total (5 * 500)

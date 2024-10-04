@@ -4,6 +4,8 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
+const BASE_URL = process.env.NEXT_PUBLIC_SERVER_URL;
+
 const Restpassword = () => {
    const [password, setPassword] =  useState('')
    const [storedEmail, setStoredEmail] = useState('');
@@ -19,7 +21,7 @@ const Restpassword = () => {
      console.log(storedEmail);
      
   try {
-    const response = await axios.post("http://localhost:3005/api/restPassword",{password, storedEmail} );
+    const response = await axios.post(`${BASE_URL}/api/restPassword`,{password, storedEmail} );
 
     if (response.data) {
       toast.success("PASSWORD RESETED", {

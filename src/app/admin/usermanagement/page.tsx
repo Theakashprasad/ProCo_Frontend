@@ -20,6 +20,9 @@ import AdminLayout from "@/components/Admin/AdminLayout";
 import adminProtectedRoute from "@/app/adminProtectedRoute";
 import Swal from "sweetalert2";
 
+const BASE_URL = process.env.NEXT_PUBLIC_SERVER_URL;
+
+
 interface User {
   _id: string;
   fullname: string;
@@ -36,10 +39,12 @@ const userManagement = function UserManagement() {
   const [loading, setLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const router = useRouter();
+  
+  const BASE_URL = process.env.NEXT_PUBLIC_SERVER_URL;
 
   useEffect(() => {
     const updatauser = async () => {
-      const res = await axios.get("http://localhost:3005/api/user", {
+      const res = await axios.get(`${BASE_URL}/api/user`, {
         withCredentials: true,
       });
       setUsers(res.data.data);
@@ -68,8 +73,9 @@ const userManagement = function UserManagement() {
       }).then(async (result) => {
         if (result.isConfirmed) {
           const action = isBlocked ? "unblock" : "block";
+
           const res = await axios.patch(
-            `http://localhost:3005/api/block/${userId}/${action}`
+            `${BASE_URL}/api/block/${userId}/${action}`
           );
           console.log(action, typeof userId);
           toast.error(`user has been ${action}`, {

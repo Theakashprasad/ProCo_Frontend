@@ -8,13 +8,15 @@ import { TiTick } from "react-icons/ti";
 import { IoMdClose } from "react-icons/io";
 import { toast } from "sonner";
 import Link from "next/link";
+import axiosInstance from "@/lib/axios";
 
 const BASE_URL = process.env.NEXT_PUBLIC_SERVER_URL;
 
 const Connection = () => {
   const { followId } = useStore();
   const [followerData, setFollowerData] = useState<any[]>([]);
-  const storedUserDetail = typeof window !== "undefined" ? localStorage.getItem("userDetail") : null;
+  const storedUserDetail =
+    typeof window !== "undefined" ? localStorage.getItem("userDetail") : null;
   const initialUserState = storedUserDetail
     ? JSON.parse(storedUserDetail)
     : null;
@@ -30,9 +32,12 @@ const Connection = () => {
     const getData = async () => {
       try {
         const receiverId = followId;
-        const res = await axios.get(
-          `http://localhost:3005/api/pro/connectionFind/${receiverId}`
+        const res = await axiosInstance.get(
+          `${BASE_URL}/api/pro/connectionFind/${receiverId}`
         );
+        // const res = await axios.get(
+        //   `http://localhost:3005/api/pro/connectionFind/${receiverId}`
+        // );
         console.log(res.data.data);
         setFollowerData(res.data.data || []);
       } catch (error) {
@@ -70,9 +75,12 @@ const Connection = () => {
           : follower
       )
     );
-    const res = await axios.post(
-      `http://localhost:3005/api/pro/connection/${senterId}/${follow}/${receiverId}`
+    const res = await axiosInstance.get(
+      `/api/pro/connection/${senterId}/${follow}/${receiverId}`
     );
+    // const res = await axios.post(
+    //   `http://localhost:3005/api/pro/connection/${senterId}/${follow}/${receiverId}`
+    // );
     console.log(res);
     if (action == "accept") {
       toast.success("REQUEST ACCEPT", {
@@ -110,9 +118,12 @@ const Connection = () => {
               <div className="w-full flex justify-between items-center">
                 <div className="text-left">
                   <Typography variant="h6">
-                    Username :- 
-                    <Link href={`/user/profile/${user.senterId._id}`} className="hover:text-blue-400">
-                      { user.senterId.fullname}
+                    Username :-
+                    <Link
+                      href={`/user/profile/${user.senterId._id}`}
+                      className="hover:text-blue-400"
+                    >
+                      {user.senterId.fullname}
                     </Link>
                   </Typography>
                 </div>
