@@ -21,6 +21,7 @@ const AdminNav = () => {
   const handlogout = () => {
     try {
       Cookies.remove("access_Admin_token"); 
+      localStorage.removeItem("jwtToken");
       router.replace("/admin/adminLogin");
     } catch (error) {
       console.log(error);

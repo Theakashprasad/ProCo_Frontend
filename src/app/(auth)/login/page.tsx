@@ -31,11 +31,11 @@ const LoginPage = () => {
         toast.success("LOGIN IS VERIFIED", {
           position: "top-center",
         });
+        localStorage.setItem(
+          "userDetail",
+          JSON.stringify(response.data.data)
+        );
         if (response.data.data.role == "user") {          
-          localStorage.setItem(
-            "userDetail",
-            JSON.stringify(response.data.data)
-          );
           router.replace("/");
         } else {
           localStorage.setItem("ProEmail", response.data.data.email);
