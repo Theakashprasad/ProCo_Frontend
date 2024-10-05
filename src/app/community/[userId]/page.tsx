@@ -10,7 +10,6 @@ import { useRouter } from "next/navigation";
 import { IoIosArrowDropdown } from "react-icons/io";
 import { IoIosArrowDropup } from "react-icons/io";
 import Image from "next/image";
-import AddQuizz from "@/components/Category/Quizz/AddQuizz";
 import Room from "@/components/home/Room";
 
 interface Member {
@@ -37,7 +36,8 @@ const Dashboard = () => {
   const params = useParams();
   const router = useRouter();
 
-  const storedUserDetail = typeof window !== "undefined" ? localStorage.getItem("userDetail") : null;
+  const storedUserDetail =
+    typeof window !== "undefined" ? localStorage.getItem("userDetail") : null;
   const initialUserState = storedUserDetail
     ? JSON.parse(storedUserDetail)
     : null;
@@ -53,7 +53,7 @@ const Dashboard = () => {
     ? params.userId[0]
     : params.userId;
   console.log("asklfddas", communityData);
-  
+
   const fetchData = useCallback(async () => {
     try {
       const proUserData = await axiosInstance.get(
@@ -100,8 +100,6 @@ const Dashboard = () => {
         return <Question userId={userId} />;
       case 2:
         return <Room userId={userId} />;
-      case 3:
-        return <AddQuizz userId={userId} />;
 
       default:
         return <Question userId={userId} />;
@@ -246,19 +244,6 @@ const Dashboard = () => {
                     )}
                   </span>
                   {/* <FaUsers className="relative z-10" /> */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-800 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                </button>
-
-                <button
-                  onClick={() => setIsClicked(3)}
-                  className={`w-full text-left text-white p-2 rounded-md flex justify-between items-center relative overflow-hidden group ${
-                    isClicked === 3
-                      ? "bg-gradient-to-r from-purple-600 to-blue-500"
-                      : "bg-[#1b1b1b]"
-                  }`}
-                >
-                  <span className="relative z-10">QUIZZ</span>
-                  {/* <IoPeopleSharp  className="relative z-10" /> */}
                   <div className="absolute inset-0 bg-gradient-to-r from-blue-800 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </button>
               </div>

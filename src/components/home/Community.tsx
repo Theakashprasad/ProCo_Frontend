@@ -64,13 +64,15 @@ const Community = () => {
   };
 
   const handleSubmit = async () => {
-    const toDoData = await axiosInstance.post("/api/pro/createCommunity", {
-      name: name,
-      creator: user._id,
-    });
-    toast.success("Community created successfully!");
-    setIsModalOpen(false);
-    fetchData();
+    if(name){
+      const toDoData = await axiosInstance.post("/api/pro/createCommunity", {
+        name: name,
+        creator: user._id,
+      });
+      toast.success("Community created successfully!");
+      setIsModalOpen(false);
+      fetchData();
+    }
   };
 
   const handleReq = async (data: User) => {
@@ -111,7 +113,7 @@ const Community = () => {
                   onClick={() => setIsModalOpen(true)}
                   className="border w-1/2 h-14 rounded-3xl"
                 >
-                  Start posting
+                  ADD
                 </button>
               </div>
             )}
