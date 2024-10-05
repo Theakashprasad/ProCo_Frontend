@@ -35,7 +35,9 @@ const LoginPage = () => {
           "userDetail",
           JSON.stringify(response.data.data)
         );
-        if (response.data.data.role == "user") {          
+        if (response.data.data.role == "user") {  
+          localStorage.setItem("jwtToken", JSON.stringify(response.data.token));
+        
           router.replace("/");
         } else {
           localStorage.setItem("ProEmail", response.data.data.email);
