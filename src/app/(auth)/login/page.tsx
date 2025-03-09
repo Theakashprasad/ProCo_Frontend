@@ -31,13 +31,10 @@ const LoginPage = () => {
         toast.success("LOGIN IS VERIFIED", {
           position: "top-center",
         });
-        localStorage.setItem(
-          "userDetail",
-          JSON.stringify(response.data.data)
-        );
-        if (response.data.data.role == "user") {  
+        localStorage.setItem("userDetail", JSON.stringify(response.data.data));
+        if (response.data.data.role == "user") {
           localStorage.setItem("jwtToken", JSON.stringify(response.data.token));
-        
+
           router.replace("/");
         } else {
           localStorage.setItem("ProEmail", response.data.data.email);
@@ -52,7 +49,10 @@ const LoginPage = () => {
                 "userDetail",
                 JSON.stringify(response.data.data)
               );
-              localStorage.setItem("jwtToken", JSON.stringify(response.data.token));
+              localStorage.setItem(
+                "jwtToken",
+                JSON.stringify(response.data.token)
+              );
               router.replace("/");
             } else {
               router.replace("/standBy");

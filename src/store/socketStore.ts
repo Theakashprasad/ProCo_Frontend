@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { io, Socket } from "socket.io-client";
 import { create } from "zustand";
@@ -47,7 +47,7 @@ interface iSocketState {
     sdp: SignalData;
     ongoingCall: OngoingCall;
     isCaller: boolean;
-  }) => void;        
+  }) => void;
 }
 
 export const useSocketStore = create<iSocketState>((set, get) => ({
@@ -90,7 +90,8 @@ export const useSocketStore = create<iSocketState>((set, get) => ({
   },
 
   handleCall: async (receiverUser) => {
-    const storedUserDetail = typeof window !== "undefined" ? localStorage.getItem("userDetail") : null;
+    const storedUserDetail =
+      typeof window !== "undefined" ? localStorage.getItem("userDetail") : null;
     const initialUserState = storedUserDetail
       ? JSON.parse(storedUserDetail)
       : null;
@@ -311,7 +312,8 @@ export const useSocketStore = create<iSocketState>((set, get) => ({
   },
 
   initializeSocket: () => {
-    const storedUserDetail = typeof window !== "undefined" ? localStorage.getItem("userDetail") : null;
+    const storedUserDetail =
+      typeof window !== "undefined" ? localStorage.getItem("userDetail") : null;
     const initialUserState = storedUserDetail
       ? JSON.parse(storedUserDetail)
       : null;
